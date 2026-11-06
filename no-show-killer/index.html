@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SlotGuard — booked slots that stop going empty</title>
+<meta name="description" content="Reply-to-confirm reminders, one-tap reschedule and deposit links for clinics, salons and studios. Join the early-access waitlist.">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body data-candidate="no-show-killer">
+  <main class="wrap">
+    <span class="badge">Early access — in development</span>
+    <h1>Booked, confirmed… and they still don't show up?</h1>
+    <p class="lede"><strong>SlotGuard</strong> is a service being built for appointment
+    businesses — clinics, salons, studios: reminders that require a reply, one-tap
+    reschedule, and an optional deposit link, so a booked slot stops being a gamble.</p>
+
+    <section class="card">
+      <h2>Sound familiar?</h2>
+      <blockquote>“When someone books a slot and does not show up, that time is hard to
+      recover. It also blocks another customer.” — a service-business owner on Reddit</blockquote>
+      <blockquote>“The biggest problem is people cancelling the appointment at the last
+      minute, or no-showing.” — a salon owner's family, days after opening</blockquote>
+      <blockquote>Mornings spent on confirmation calls “that nobody listened to” — while
+      a simple text gets an actual response.</blockquote>
+    </section>
+
+    <section class="card">
+      <h2>What SlotGuard will do</h2>
+      <ul>
+        <li><strong>Reminders that require a reply.</strong> Clients confirm with one tap;
+        no reply means the slot is flagged while there's still time to refill it — not
+        after it goes empty.</li>
+        <li><strong>One-tap reschedule in every reminder.</strong> A client who would have
+        ghosted instead moves their booking, and the freed slot can be offered to your
+        waitlist.</li>
+        <li><strong>Optional deposit link for high-value slots.</strong> In one
+        r/smallbusiness thread, an operator reported a $25 deposit on a $150 service cut
+        no-shows from roughly 30% to under 10% within two months.</li>
+      </ul>
+    </section>
+
+    <section class="card reward">
+      <h2>Founding reward</h2>
+      <p><strong>Founding price, locked for life, plus a free pilot month.</strong>
+      Waitlist members get first access to pilot slots: we onboard a small first group
+      of clinics and salons by hand before opening up.</p>
+    </section>
+
+    <section class="card">
+      <h2>Join the waitlist</h2>
+      <form id="waitlist-form" novalidate>
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" required autocomplete="email"
+               placeholder="you@yourbusiness.com">
+        <label for="role">Which best describes your business?</label>
+        <select id="role" name="role" required>
+          <option value="" disabled selected>Select one…</option>
+          <!-- Role options are filled in from the per-candidate config in waitlist.js -->
+        </select>
+        <label class="checkbox">
+          <input type="checkbox" name="pilot_interest">
+          <span><strong>I'm interested in a pilot slot</strong> — contact me first when
+          onboarding opens (pilot requests are counted separately from general signups).</span>
+        </label>
+        <input type="hidden" name="candidate" value="">
+        <input type="hidden" name="referred_by" value="">
+        <input type="hidden" name="source" value="">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Join the SlotGuard waitlist</button>
+        <p class="fineprint">Double opt-in: we'll send <strong>one confirmation email</strong>.
+        Only confirmed emails count toward the launch decision — an unconfirmed signup is
+        not counted. No spam, no selling your address, unsubscribe any time.</p>
+      </form>
+
+      <div id="success-panel" hidden>
+        <h2>You're almost in — check your inbox to confirm.</h2>
+        <p>We sent a confirmation email. <strong>Your place only counts once you
+        confirm</strong> — that's what keeps this list honest.</p>
+        <p class="position">Your place in line: <span id="position-number">#–</span></p>
+        <p>Want to move up and help this launch? Share your personal link — when someone
+        joins through it <em>and confirms</em>, you're credited:</p>
+        <div class="share-row">
+          <input type="text" id="referral-link" readonly value="">
+          <button type="button" id="copy-referral">Copy link</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="footnote">Pain quotes above are paraphrased from real Reddit posts
+    (r/smallbusiness and other owner communities, 2025–2026) gathered in our demand
+    research. SlotGuard is in development: this page collects early-access interest only,
+    and the service launches first to confirmed waitlist members if demand targets are met.</p>
+  </main>
+  <script src="../assets/waitlist.js"></script>
+</body>
+</html>
