@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
         referral_code: generateReferralCode(config.codePrefix, existing),
         referred_by: referredBy,
         source: source,
-        confirmed: false, // Double opt-in: counts only after inbox confirmation.
+        confirmed: false, // Double opt-in: counts only after the emailed one-click confirmation — one click and you're on the list. No forms to fill.
         submitted_at: new Date().toISOString()
       };
       const all = saveSubmission(record);
