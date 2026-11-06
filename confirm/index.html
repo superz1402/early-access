@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirm your spot — early access</title>
+<meta name="description" content="One-click confirmation for the PaidChase and SlotGuard early-access waitlists.">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <span class="badge">Early access — confirmation</span>
+
+    <section class="card" id="state-working">
+      <h1>Confirming your spot…</h1>
+      <p class="lede">One moment — we're confirming your place on the list.</p>
+    </section>
+
+    <section class="card" id="state-success" hidden>
+      <h1>You're on the list.</h1>
+      <p>Your <strong id="success-candidate">early access</strong> spot is confirmed.
+      This is a 14-day validation test: if enough owners confirm, the founding members
+      get the pilot offer first — we'll email you the result either way.</p>
+      <p><a class="btn" id="back-link" href="../">Back to the overview</a></p>
+    </section>
+
+    <section class="card" id="state-error" hidden>
+      <h1>That link needs a second look.</h1>
+      <p>This confirmation link looks incomplete — please use the exact link from
+      your email.</p>
+      <p>If the problem persists, you can confirm directly here instead:
+      <a id="direct-link" href="https://docs.google.com/forms/d/e/1FAIpQLScAxt5Vs8vb6TRUqWV1Sz6lTYRUlZpcdCyYDmA7HLFWvsLGpg/viewform">open the confirmation form</a>.</p>
+    </section>
+
+    <noscript>
+      <section class="card">
+        <h2>JavaScript is off</h2>
+        <p>Automatic one-click confirmation needs JavaScript. You can confirm
+        directly instead — open the confirmation form and submit the code from
+        your email:
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScAxt5Vs8vb6TRUqWV1Sz6lTYRUlZpcdCyYDmA7HLFWvsLGpg/viewform">open the confirmation form</a>.</p>
+      </section>
+    </noscript>
+
+    <p class="footnote">Confirmation is recorded against the email address you
+    signed up with. No further action is needed after this page.</p>
+  </main>
+
+  <script>
+  (function () {
+    "use strict";
+    var CONFIRM_ENDPOINT = "https://docs.google.com/forms/d/e/1FAIpQLScAxt5Vs8vb6TRUqWV1Sz6lTYRUlZpcdCyYDmA7HLFWvsLGpg/formResponse";
+    var CONFIRM_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScAxt5Vs8vb6TRUqWV1Sz6lTYRUlZpcdCyYDmA7HLFWvsLGpg/viewform";
+    var TOKEN_FIELD = "entry.1951736974";
+    var CANDIDATES = {
+      "invoice-chaser": { name: "PaidChase", url: "../invoice-chaser/" },
+      "no-show-killer": { name: "SlotGuard", url: "../no-show-killer/" }
+    };
+
+    var params = new URLSearchParams(window.location.search);
+    var token = params.get("t");
+    var candidate = CANDIDATES[params.get("c")] || null;
+
+    var working = document.getElementById("state-working");
+    var success = document.getElementById("state-success");
+    var error = document.getElementById("state-error");
+
+    function show(el) {
+      working.hidden = true;
+      success.hidden = true;
+      error.hidden = true;
+      el.hidden = false;
+    }
+
+    function showSuccess() {
+      if (candidate) {
+        document.getElementById("success-candidate").textContent = candidate.name;
+        var back = document.getElementById("back-link");
+        back.href = candidate.url;
+        back.textContent = "Back to " + candidate.name;
+      }
+      show(success);
+    }
+
+    if (!token) {
+      show(error);
+      return;
+    }
+
+    // Direct-form fallback link (also used if the automatic POST cannot run).
+    document.getElementById("direct-link").href =
+      CONFIRM_FORM + "?usp=pp_url&" + TOKEN_FIELD + "=" + encodeURIComponent(token);
+
+    if (token === "PREVIEW") {
+      showSuccess();
+      return;
+    }
+
+    var body = new URLSearchParams();
+    body.set(TOKEN_FIELD, token);
+    // Google Forms returns no CORS headers; no-cors = fire-and-forget.
+    window.fetch(CONFIRM_ENDPOINT, { method: "POST", mode: "no-cors", body: body })
+      .then(showSuccess)
+      .catch(showSuccess);
+  })();
+  </script>
+</body>
+</html>
