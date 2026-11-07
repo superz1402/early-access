@@ -148,3 +148,11 @@ was copied verbatim. Full study: `~/workspace/research/github-study/03-waitlist-
 3. At decision time: contact **confirmed** members in order — pilot requests
    first, then by referral count, then earliest signup — with the GO/NO-GO
    outcome stated honestly either way.
+
+---
+
+## Project status
+
+**Completed project** — verified in the portfolio audit of **7 November 2026** (README, codebase and project state reviewed).
+
+_Last verified: 7 November 2026_
